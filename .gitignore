@@ -175,3 +175,5 @@ solutions/
 *.pptx
 !lec1/elf_types/mylib.so
 .gdb_history
+payload
+cryptocat/*/flag.txt
