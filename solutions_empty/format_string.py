@@ -12,8 +12,6 @@ exe = context.binary = ELF(args.EXE or 'challenges/format_string-2.03')
 # for all created processes...
 # ./exploit.py DEBUG NOASLR
 
-
-
 def start(argv=[], *a, **kw):
     '''Start the exploit against the target.'''
     if args.GDB:

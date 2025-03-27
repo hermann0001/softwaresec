@@ -5,7 +5,7 @@
 from pwn import *
 
 # Set up pwntools for the correct architecture
-exe = context.binary = ELF(args.EXE or 'challenges/ROP32-3.01')
+exe = context.binary = ELF(args.EXE or '../challenges/ROP32-3.01')
 
 # Many built-in settings can be controlled on the command-line and show up
 # in "args".  For example, to dump all data sent/received, and disable ASLR
@@ -15,11 +15,13 @@ exe = context.binary = ELF(args.EXE or 'challenges/ROP32-3.01')
 
 
 def start(argv=[], *a, **kw):
-    '''Start the exploit against the target.'''
-    if args.GDB:
-        return gdb.debug([exe.path] + argv, gdbscript=gdbscript, *a, **kw)
-    else:
-        return process([exe.path] + argv, *a, **kw)
+	'''Start the exploit against the target.'''
+	if args.GDB:
+		return gdb.debug([exe] + argv, gdbscript=gdbscript, *a, **kw)
+	elif args.REMOTE:
+		return remote(HOST, PORT)
+	else:
+		return process([exe] + argv, *a, **kw)
 
 # Specify your GDB script here for debugging
 # GDB will be launched if the exploit is run via e.g.
